@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace JShop.Models
 {
     public class User

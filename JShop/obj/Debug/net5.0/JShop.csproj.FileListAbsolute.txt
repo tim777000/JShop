@@ -1,0 +1,15 @@
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.csprojAssemblyReference.cache
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.AssemblyInfoInputs.cache
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.AssemblyInfo.cs
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.csproj.CoreCompileInputs.cache
+/Users/yutingguang/Projects/JShop/JShop/bin/Debug/net5.0/JShop.deps.json
+/Users/yutingguang/Projects/JShop/JShop/bin/Debug/net5.0/JShop.runtimeconfig.json
+/Users/yutingguang/Projects/JShop/JShop/bin/Debug/net5.0/JShop.runtimeconfig.dev.json
+/Users/yutingguang/Projects/JShop/JShop/bin/Debug/net5.0/JShop.dll
+/Users/yutingguang/Projects/JShop/JShop/bin/Debug/net5.0/ref/JShop.dll
+/Users/yutingguang/Projects/JShop/JShop/bin/Debug/net5.0/JShop.pdb
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.dll
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/ref/JShop.dll
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.pdb
+/Users/yutingguang/Projects/JShop/JShop/obj/Debug/net5.0/JShop.genruntimeconfig.cache
