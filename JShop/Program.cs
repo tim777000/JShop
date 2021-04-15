@@ -10,9 +10,10 @@ namespace JShop
             string line;
             line = Console.ReadLine().Trim();
             string[] lineSplit = line.Split(null, 2);
-            line = lineSplit[0];
-            lineSplit = lineSplit[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            return (line, lineSplit);
+            string cmd = lineSplit[0];
+            string[] data = lineSplit[1].Split(' ', StringSplitOptions.RemoveEmptyEntries&StringSplitOptions.TrimEntries);
+            data[0] = data[0].ToLower();
+            return (cmd, data);
         }
 
         static void Main(string[] args)

@@ -6,7 +6,7 @@ using JShop.Controllers;
 
 namespace JShop.Tests
 {
-    public class UnitTest1
+    public class REGISTERService_SuccessOrError
     {
         private UserDB _userDB = UserDB.SingletonDB;
 
