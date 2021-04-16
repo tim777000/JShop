@@ -3,7 +3,7 @@ using JShop.Data;
 
 namespace JShop.Actions
 {
-    public class GET_LISTING : IAction
+    public class GET_CATEGORY : IAction
     {
         private DB _listingDB;
         private string[] resultArray;
@@ -12,7 +12,7 @@ namespace JShop.Actions
         {
             _listingDB = db;
             resultArray = _listingDB.Get(data);
-            result = String.Join('|', resultArray);
+            result = String.Join('\n', resultArray);
             return result;
         }
     }

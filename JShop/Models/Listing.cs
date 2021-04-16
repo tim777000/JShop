@@ -4,7 +4,7 @@ namespace JShop.Models
 {
     public class Listing
     {
-        private static int _counter;
+        private static int _counter = 100000;
         private static int Counter()
         {
             _counter++;

@@ -47,9 +47,9 @@ namespace JShop.Data
                 return "Error - user already existing";
             }
         }
-        public string Get(string[] data)
+        public string[] Get(string[] data)
         {
-            return "To Be Continued...";
+            return new string[] { "To Be Continued..." };
         }
         public string Delete(string[] data)
         {

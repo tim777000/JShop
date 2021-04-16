@@ -36,6 +36,13 @@ namespace JShop.Controllers
                 result = action.Execute(_listingDB, data);
                 return result;
             }
+            else if(cmd.Equals("GET_CATEGORY"))
+            {
+                action = new GET_CATEGORY();
+                result = action.Execute(_listingDB, data);
+                return result;
+            }
+
             return result;
         }
     }

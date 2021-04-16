@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JShop.Models;
 
 namespace JShop.Data
@@ -23,33 +24,55 @@ namespace JShop.Data
             }
         }
 
-        private Dictionary<string, List<Listing>> _categories = new Dictionary<string, List<Listing>>();
+        private Dictionary<string, List<int>> _categories = new Dictionary<string, List<int>>();
+
         public bool Check(string data)
         {
             return _categories.ContainsKey(data);
         }
         public string Create(string[] data)
         {
-            string category = data[4];
-            if(Check(category))
+            return "To Be Continued...";
+        }
+        public string Delete(string[] data)
+        {
+            return "To Be Continued...";
+        }
+        public string Create(string data, int id)
+        {
+            string category = data;
+            int listingid = id;
+            if (Check(category))
             {
-                _categories[category].Add(new Listing(data));
+                _categories[category].Add(listingid);
                 return "Successfully Appended";
             }
             else
             {
-                _categories.Add(category, new List<Listing>());
-                _categories[category].Add(new Listing(data));
+                _categories.Add(category, new List<int>());
+                _categories[category].Add(listingid);
                 return "Successfully Added New Category and Appended";
             }
         }
-        public string Get(string[] data)
+        public string[] Get(string[] data)
         {
-            return "";
+            string category = data[0];
+            if (!Check(category))
+            {
+                return new string[] { "Error - category not found" };
+            }
+            else
+            {
+                string[] result = _categories[category].Select(i => i.ToString()).ToArray();
+                return result;
+            }
         }
-        public string Delete(string[] data)
+        public string Delete(string data, int id)
         {
-            return "";
+            string category = data;
+            int listingid = id;
+            _categories[category].RemoveAt(_categories[category].FindIndex(i => i == listingid));
+            return "Successfully Deleted";
         }
     }
 }

@@ -26,6 +26,7 @@ namespace JShop.Data
 
         private Dictionary<int, Listing> _listings = new Dictionary<int, Listing>();
         private UserDB _userDB = UserDB.SingletonDB;
+        private CategoryDB _categoryDB = CategoryDB.SingletonDB;
 
         public bool Check(string username)
         {
@@ -59,27 +60,42 @@ namespace JShop.Data
                 Listing listing = new Listing(data);
                 int listingid = listing.GetListingId();
                 _listings.Add(listingid, listing);
+                _categoryDB.Create(listing.GetCategory(), listingid);
                 return listingid.ToString();
             }
         }
 
-        public string Get(string[] data)
+        public string[] Get(string[] data)
         {
+            if (data.Length == 4)
+            {
+                if (data[2].Equals("sort_time") || data[2].Equals("sort_price"))
+                {
+                    return GetCategory(data);
+                }
+                else
+                {
+                    return new string[] { "Usage: GET_CATEGORY [Username] [Category] [sort_time|sort_price] [asc|dsc]" };
+                }
+            }
             string user = data[0];
             int listingID = Int32.Parse(data[1]);
-            
-            if (!Check(listingID))
+            if (data.Length != 2)
             {
-                return "Error - not found";
+                return new string[] { "Usage: GET_LISTING [Username] [Listing ID]" };
+            }
+            else if (!Check(listingID))
+            {
+                return new string[] { "Error - not found" };
             }
             else if (!Check(user))
             {
-                return "Error - unknown user";
+                return new string[] { "Error - unknown user" };
             }
             else
             {
                 Listing listing = _listings[listingID];
-                string result = String.Join('|', listing.GetListingData());
+                string[] result = listing.GetListingData();
                 return result;
             }
         }
@@ -102,8 +118,64 @@ namespace JShop.Data
             }
             else
             {
+                _categoryDB.Delete(_listings[listingID].GetCategory(), listingID);
                 _listings.Remove(listingID);
                 return "Success";
+            }
+        }
+
+        public string[] GetCategory(string[] data)
+        {
+            string[] resultID;
+            string user = data[0];
+            string category = data[1].Trim('\'');
+            List<Listing> resultListing = new List<Listing>();
+            List<string> resultArray = new List<string>();
+            if (!Check(user))
+            {
+                return new string[] { "Error - unknown user" };
+            }
+            else
+            {
+                resultID = _categoryDB.Get(new string[] { category });
+                if(resultID[0].Equals("Error - category not found"))
+                {
+                    return new string[] { "Error - category not found" };
+                }
+                foreach (string s in resultID)
+                {
+                    resultListing.Add(_listings[Int32.Parse(s)]);
+                }
+                string sortingBase = data[2];
+                string sortingWay = data[3];
+                if(sortingBase.Equals("sort_price"))
+                {
+                    if(sortingWay.Equals("asc"))
+                    {
+                        resultListing = resultListing.OrderBy(l => l.GetPrice()).ToList();
+                    }
+                    else
+                    {
+                        resultListing = resultListing.OrderByDescending(l => l.GetPrice()).ToList();
+                    }
+                }
+                else
+                {
+                    if (sortingWay.Equals("asc"))
+                    {
+                        resultListing = resultListing.OrderBy(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
+                    }
+                    else
+                    {
+                        resultListing = resultListing.OrderByDescending(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
+                    }
+                }
+                foreach(Listing l in resultListing)
+                {
+                    resultArray.Add(String.Join('|', l.GetListingData()));
+                }
+                string[] result = resultArray.ToArray();
+                return result;
             }
         }
     }

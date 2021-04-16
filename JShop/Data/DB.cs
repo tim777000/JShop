@@ -5,7 +5,7 @@ namespace JShop.Data
     {
         public bool Check(string data);
         public string Create(string[] data);
-        public string Get(string[] data);
+        public string[] Get(string[] data);
         public string Delete(string[] data);
     }
 }
