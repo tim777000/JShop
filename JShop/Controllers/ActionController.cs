@@ -8,6 +8,7 @@ namespace JShop.Controllers
     {
         private UserDB _userDB = UserDB.SingletonDB;
         private ListingDB _listingDB = ListingDB.SingletonDB;
+        private CategoryDB _categoryDB = CategoryDB.SingletonDB;
         private IAction action;
         private string result = "See Manual";
         public string Actions(string cmd, string[] data)
@@ -39,6 +40,12 @@ namespace JShop.Controllers
             else if(cmd.Equals("GET_CATEGORY"))
             {
                 action = new GET_CATEGORY();
+                result = action.Execute(_listingDB, data);
+                return result;
+            }
+            else if (cmd.Equals("GET_TOP_CATEGORY"))
+            {
+                action = new GET_TOP_CATEGORY();
                 result = action.Execute(_listingDB, data);
                 return result;
             }

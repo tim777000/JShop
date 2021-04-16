@@ -78,6 +78,10 @@ namespace JShop.Data
                     return new string[] { "Usage: GET_CATEGORY [Username] [Category] [sort_time|sort_price] [asc|dsc]" };
                 }
             }
+            if (data.Length == 1)
+            {
+                return new string[] { GetTopCategory(data) };
+            }
             string user = data[0];
             int listingID = Int32.Parse(data[1]);
             if (data.Length != 2)
@@ -137,11 +141,11 @@ namespace JShop.Data
             }
             else
             {
-                resultID = _categoryDB.Get(new string[] { category });
-                if(resultID[0].Equals("Error - category not found"))
+                if (!_categoryDB.Check(category))
                 {
                     return new string[] { "Error - category not found" };
                 }
+                resultID = _categoryDB.Get(new string[] { category });
                 foreach (string s in resultID)
                 {
                     resultListing.Add(_listings[Int32.Parse(s)]);
@@ -176,6 +180,19 @@ namespace JShop.Data
                 }
                 string[] result = resultArray.ToArray();
                 return result;
+            }
+        }
+
+        public string GetTopCategory(string[] data)
+        {
+            string user = data[0];
+            if(!Check(user))
+            {
+                return "Error - unknown user";
+            }
+            else
+            {
+                return _categoryDB.Count();
             }
         }
     }

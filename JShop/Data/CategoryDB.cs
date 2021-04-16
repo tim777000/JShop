@@ -34,10 +34,12 @@ namespace JShop.Data
         {
             return "To Be Continued...";
         }
+
         public string Delete(string[] data)
         {
             return "To Be Continued...";
         }
+
         public string Create(string data, int id)
         {
             string category = data;
@@ -54,25 +56,34 @@ namespace JShop.Data
                 return "Successfully Added New Category and Appended";
             }
         }
+
         public string[] Get(string[] data)
         {
             string category = data[0];
-            if (!Check(category))
-            {
-                return new string[] { "Error - category not found" };
-            }
-            else
-            {
-                string[] result = _categories[category].Select(i => i.ToString()).ToArray();
-                return result;
-            }
+            string[] result = _categories[category].Select(i => i.ToString()).ToArray();
+            return result;
         }
+
         public string Delete(string data, int id)
         {
             string category = data;
             int listingid = id;
             _categories[category].RemoveAt(_categories[category].FindIndex(i => i == listingid));
             return "Successfully Deleted";
+        }
+
+        public string Count()
+        {
+            string result = "Empty";
+            int max = 0;
+            foreach(KeyValuePair<string, List<int>> p in _categories)
+            {
+                if (p.Value.Count() > max)
+                {
+                    result = p.Key;
+                }
+            }
+            return result;
         }
     }
 }
