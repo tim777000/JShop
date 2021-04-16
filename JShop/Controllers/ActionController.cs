@@ -9,7 +9,7 @@ namespace JShop.Controllers
         private UserDB _userDB = UserDB.SingletonDB;
         private ListingDB _listingDB = ListingDB.SingletonDB;
         private IAction action;
-        private string result = "";
+        private string result = "See Manual";
         public string Actions(string cmd, string[] data)
         {
             if(cmd.Equals("REGISTER"))
@@ -27,6 +27,12 @@ namespace JShop.Controllers
             else if(cmd.Equals("DELETE_LISTING"))
             {
                 action = new DELETE_LISTING();
+                result = action.Execute(_listingDB, data);
+                return result;
+            }
+            else if(cmd.Equals("GET_LISTING"))
+            {
+                action = new GET_LISTING();
                 result = action.Execute(_listingDB, data);
                 return result;
             }

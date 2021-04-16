@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JShop.Models;
 
 namespace JShop.Data
@@ -49,7 +50,7 @@ namespace JShop.Data
             {
                 return "Usage: CREATE_LISTING [Username] [Title] [Description] [Price] [Category]";
             }
-            else if(!Check(user))
+            else if (!Check(user))
             {
                 return "Error - unknown user";
             }
@@ -64,22 +65,38 @@ namespace JShop.Data
 
         public string Get(string[] data)
         {
-            return "";
+            string user = data[0];
+            int listingID = Int32.Parse(data[1]);
+            
+            if (!Check(listingID))
+            {
+                return "Error - not found";
+            }
+            else if (!Check(user))
+            {
+                return "Error - unknown user";
+            }
+            else
+            {
+                Listing listing = _listings[listingID];
+                string result = String.Join('|', listing.GetListingData());
+                return result;
+            }
         }
 
         public string Delete(string[] data)
         {
             string user = data[0];
             int listingID = Int32.Parse(data[1]);
-            if(data.Length != 2)
+            if (data.Length != 2)
             {
                 return "Usage: DELETE_LISTING [Username] [Listing ID]";
             }
-            else if(!Check(listingID))
+            else if (!Check(listingID))
             {
                 return "Error - listing does not exist";
             }
-            else if(!Check(listingID, user))
+            else if (!Check(listingID, user))
             {
                 return "Error - listing owner mismatch";
             }
