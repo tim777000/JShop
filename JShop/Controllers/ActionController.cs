@@ -24,6 +24,12 @@ namespace JShop.Controllers
                 result = action.Execute(_listingDB, data);
                 return result;
             }
+            else if(cmd.Equals("DELETE_LISTING"))
+            {
+                action = new DELETE_LISTING();
+                result = action.Execute(_listingDB, data);
+                return result;
+            }
             return result;
         }
     }

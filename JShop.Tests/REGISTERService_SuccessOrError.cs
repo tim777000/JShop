@@ -8,8 +8,6 @@ namespace JShop.Tests
 {
     public class REGISTERService_SuccessOrError
     {
-        private UserDB _userDB = UserDB.SingletonDB;
-
         [Fact]
         public void Test1()
         {
