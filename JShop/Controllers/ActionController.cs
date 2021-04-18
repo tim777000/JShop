@@ -8,9 +8,8 @@ namespace JShop.Controllers
     {
         private UserDB _userDB = UserDB.SingletonDB;
         private ListingDB _listingDB = ListingDB.SingletonDB;
-        private CategoryDB _categoryDB = CategoryDB.SingletonDB;
         private IAction action;
-        private string result = "See Manual";
+        private string result = "Wrong Usage! See Manual!";
         public string Actions(string cmd, string[] data)
         {
             if(cmd.Equals("REGISTER"))
@@ -49,7 +48,8 @@ namespace JShop.Controllers
                 result = action.Execute(_listingDB, data);
                 return result;
             }
-
+            action = null;
+            result = "Wrong Usage! See Manual!";
             return result;
         }
     }

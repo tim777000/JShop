@@ -45,13 +45,8 @@ namespace JShop.Data
 
         public string Create(string[] data)
         {
-            data = String.Join(' ', data).Split('\'', StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries);
             string user = data[0];
-            if (data.Length != 5)
-            {
-                return "Usage: CREATE_LISTING [Username] [Title] [Description] [Price] [Category]";
-            }
-            else if (!Check(user))
+            if (!Check(user))
             {
                 return "Error - unknown user";
             }
@@ -69,14 +64,7 @@ namespace JShop.Data
         {
             if (data.Length == 4)
             {
-                if (data[2].Equals("sort_time") || data[2].Equals("sort_price"))
-                {
-                    return GetCategory(data);
-                }
-                else
-                {
-                    return new string[] { "Usage: GET_CATEGORY [Username] [Category] [sort_time|sort_price] [asc|dsc]" };
-                }
+                return GetCategory(data);
             }
             if (data.Length == 1)
             {
@@ -84,11 +72,7 @@ namespace JShop.Data
             }
             string user = data[0];
             int listingID = Int32.Parse(data[1]);
-            if (data.Length != 2)
-            {
-                return new string[] { "Usage: GET_LISTING [Username] [Listing ID]" };
-            }
-            else if (!Check(listingID))
+            if (!Check(listingID))
             {
                 return new string[] { "Error - not found" };
             }
@@ -108,11 +92,7 @@ namespace JShop.Data
         {
             string user = data[0];
             int listingID = Int32.Parse(data[1]);
-            if (data.Length != 2)
-            {
-                return "Usage: DELETE_LISTING [Username] [Listing ID]";
-            }
-            else if (!Check(listingID))
+            if (!Check(listingID))
             {
                 return "Error - listing does not exist";
             }
@@ -132,7 +112,7 @@ namespace JShop.Data
         {
             string[] resultID;
             string user = data[0];
-            string category = data[1].Trim('\'');
+            string category = data[1];
             List<Listing> resultListing = new List<Listing>();
             List<string> resultArray = new List<string>();
             if (!Check(user))

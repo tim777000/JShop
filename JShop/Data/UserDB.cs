@@ -32,10 +32,6 @@ namespace JShop.Data
 
         public string Create(string[] data)
         {
-            if(data.Length != 1)
-            {
-                return "Usage: REGISTER [Username]";
-            }
             string user = data[0];
             if(!Check(user))
             {

@@ -9,6 +9,10 @@ namespace JShop.Actions
         private string result;
         public string Execute(DB db, string[] data)
         {
+            if (data.Length != 1)
+            {
+                return "Usage: REGISTER [Username]";
+            }
             _userDB = db;
             result = _userDB.Create(data);
             return result;

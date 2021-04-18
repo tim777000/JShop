@@ -10,6 +10,10 @@ namespace JShop.Actions
         private string result;
         public string Execute(DB db, string[] data)
         {
+            if (data.Length != 1)
+            {
+                return "Usage: GET_TOP_CATEGORY [Username]";
+            }
             _listingDB = db;
             resultArray = _listingDB.Get(data);
             result = String.Join(null, resultArray);

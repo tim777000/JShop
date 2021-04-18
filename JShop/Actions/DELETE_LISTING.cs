@@ -9,6 +9,10 @@ namespace JShop.Actions
         private string result;
         public string Execute(DB db, string[] data)
         {
+            if (data.Length != 2)
+            {
+                return "Usage: DELETE_LISTING [Username] [Listing ID]";
+            }
             _listingDB = db;
             result = _listingDB.Delete(data);
             return result;

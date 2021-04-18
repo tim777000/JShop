@@ -10,6 +10,10 @@ namespace JShop
             string line;
             line = Console.ReadLine().Trim();
             string[] lineSplit = line.Split(null, 2);
+            if (lineSplit.Length != 2)
+            {
+                return (null, null);
+            }
             string cmd = lineSplit[0];
             string[] data = lineSplit[1].Split(' ', StringSplitOptions.RemoveEmptyEntries&StringSplitOptions.TrimEntries);
             data[0] = data[0].ToLower();
@@ -22,6 +26,10 @@ namespace JShop
             while (true)
             {
                 (string cmd, string[] data) = GetCmd();
+                if (cmd == null || data == null)
+                {
+                    continue;
+                }
                 Console.WriteLine(actionController.Actions(cmd, data));
             }
         }

@@ -10,6 +10,10 @@ namespace JShop.Actions
         private string result;
         public string Execute(DB db, string[] data)
         {
+            if (data.Length != 2)
+            {
+                return "Usage: GET_LISTING [Username] [Listing ID]";
+            }
             _listingDB = db;
             resultArray = _listingDB.Get(data);
             result = String.Join('|', resultArray);
