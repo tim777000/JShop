@@ -132,29 +132,8 @@ namespace JShop.Data
                 }
                 string sortingBase = data[2];
                 string sortingWay = data[3];
-                if(sortingBase.Equals("sort_price"))
-                {
-                    if(sortingWay.Equals("asc"))
-                    {
-                        resultListing = resultListing.OrderBy(l => l.GetPrice()).ToList();
-                    }
-                    else
-                    {
-                        resultListing = resultListing.OrderByDescending(l => l.GetPrice()).ToList();
-                    }
-                }
-                else
-                {
-                    if (sortingWay.Equals("asc"))
-                    {
-                        resultListing = resultListing.OrderBy(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
-                    }
-                    else
-                    {
-                        resultListing = resultListing.OrderByDescending(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
-                    }
-                }
-                foreach(Listing l in resultListing)
+                resultListing = sortListing(resultListing, sortingBase, sortingWay);
+                foreach (Listing l in resultListing)
                 {
                     resultArray.Add(String.Join('|', l.GetListingData()));
                 }
@@ -173,6 +152,32 @@ namespace JShop.Data
             else
             {
                 return _categoryDB.Count();
+            }
+        }
+
+        public List<Listing> sortListing(List<Listing> listings, string sortingBase, string sortingWay)
+        {
+            if (sortingBase.Equals("sort_price"))
+            {
+                if (sortingWay.Equals("asc"))
+                {
+                    return listings.OrderBy(l => l.GetPrice()).ToList();
+                }
+                else
+                {
+                    return listings.OrderByDescending(l => l.GetPrice()).ToList();
+                }
+            }
+            else
+            {
+                if (sortingWay.Equals("asc"))
+                {
+                    return listings.OrderBy(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
+                }
+                else
+                {
+                    return listings.OrderByDescending(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
+                }
             }
         }
     }
