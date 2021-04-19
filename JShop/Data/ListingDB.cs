@@ -172,11 +172,13 @@ namespace JShop.Data
             {
                 if (sortingWay.Equals("asc"))
                 {
-                    return listings.OrderBy(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
+                    return listings.OrderBy(l => DateTime.ParseExact
+                    (l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
                 }
                 else
                 {
-                    return listings.OrderByDescending(l => DateTime.ParseExact(l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
+                    return listings.OrderByDescending(l => DateTime.ParseExact
+                    (l.GetCreateTime(), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)).ToList();
                 }
             }
         }
