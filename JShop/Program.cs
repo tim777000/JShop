@@ -29,7 +29,7 @@ namespace JShop
                 (string cmd, string[] data) = GetCmd();
                 if (cmd == null || data == null)
                 {
-                    continue;
+                    // continue;
                 }
                 Console.WriteLine(actionController.Actions(cmd, data));
             //}
