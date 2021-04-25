@@ -1,0 +1,4 @@
+/Users/yutingguang/Projects/JShop/published/JShop.dll
+/Users/yutingguang/Projects/JShop/published/JShop.deps.json
+/Users/yutingguang/Projects/JShop/published/JShop.runtimeconfig.json
+/Users/yutingguang/Projects/JShop/published/JShop.pdb
