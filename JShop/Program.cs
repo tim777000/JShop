@@ -8,8 +8,7 @@ namespace JShop
         static (string, string[]) GetCmd()
         {
             string line;
-            // line = Console.ReadLine().Trim();
-            line = "REGISTER user1";
+            line = Console.ReadLine().Trim();
             string[] lineSplit = line.Split(null, 2);
             if (lineSplit.Length != 2)
             {
@@ -24,15 +23,15 @@ namespace JShop
         static void Main(string[] args)
         {
             ActionController actionController = new ActionController();
-            //while (true)
-            //{
+            while (true)
+            {
                 (string cmd, string[] data) = GetCmd();
                 if (cmd == null || data == null)
                 {
-                    // continue;
+                    continue;
                 }
                 Console.WriteLine(actionController.Actions(cmd, data));
-            //}
+            }
         }
 
     }
